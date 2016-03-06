@@ -29,6 +29,7 @@
   <script src="../../lib/comment.js"></script>
   <script src="../../lib/infer.js"></script>
   <script src="demo.js"></script>
+  <script src="../../plugin/angular.js"></script>
   <script src="../../plugin/modules.js"></script>
   <script src="../../plugin/es_modules.js"></script>
   <script src="../../plugin/requirejs.js"></script>
@@ -70,51 +71,34 @@ function argument hints will appear in the bar below the editor.</p>
 </div>
 
 <div style="display: none" id="projects">
-<project id="simple"
-         data-plugins="doc_comments complete_strings"
-         data-libs="ecma5 browser">
-<pre id="test">
-// Use ctrl-space to complete something
-co
-document.body.a
-
-// Put the cursor in or after an expression, press ctrl-i to
-// find its type
-
-var foo = ["array", "of", "strings"]
-var bar = foo.slice(0, 2).join("").split("a")[0]
-
-// Works for locally defined types too.
-
-function CTor() { this.size = 10 }
-CTor.prototype.hallo = "hallo"
-
-var baz = new CTor
-baz.
-
-// You can press ctrl-q when the cursor is on a variable
-// name to rename it. Try it with CTor...
-
-// When the cursor is in an argument list, the arguments
-// are shown below the editor.
-
-[1].reduce(  )
-</pre>
-</project>
 
 <project id="requirejs"
-         data-plugins="requirejs doc_comments complete_strings"
+         data-plugins="requirejs doc_comments complete_strings angular"
          data-libs="ecma5 browser jquery">
 <pre id="main.js">
-// A simple set of three modules, connected with requirejs
-
-requirejs(["text_util", "output"], function(text, output) {
-  window.addEventListener("load", function() {
-    // Pressing alt-. on `garble` jumps to the module
-    var word = text.capitalize(text.garble(prompt("Hi", "")))
-    output.write(word)
-  })
-})
+angular.module('SageDataManager')
+.controller('wholeapp', ['$scope','$http', function($scope, $http) {}])
+.controller('navbardata', ['$scope','$http', '$timeout', function($scope, $http, $timeout) {}])
+.controller('mainmenu', ['$scope','$http', function($scope, $http) {}])
+.controller('intake_house', ['$scope','$http', function($scope, $http) {}])
+.controller('intake_client', ['$scope','$http', '$timeout', function($scope, $http, $timeout) {}])
+.controller('attendance_checkin', ['$scope','$http', '$timeout', function($scope, $http, $timeout) {}])
+.controller('attendance_view', ['$scope','$http', '$timeout', 'view2clientserv', '$location', function($scope, $http, $timeout, view2clientserv, $location) {}])
+.service('srv_functions', ['$http',function($http) {}])
+.controller('reports', ['$scope','$http', '$timeout', 'srv_functions', function($scope, $http, $timeout, srv_functions) {}])
+.controller('maintenance', ['$scope','$http', '$timeout', function($scope, $http, $timeout) {}])
+.controller('help', ['$scope','$http', function($scope, $http) {}])
+.factory("AutoCompleteService", ["$http", function ($http) {}])
+.directive("autocomplete", ["AutoCompleteService", '$timeout', '$http', function (AutoCompleteService, $timeout, $http) {}])
+.controller('maint_client', ['$scope','$http', '$timeout', function($scope, $http, $timeout) {}])
+.controller('maint_house', ['$scope','$http', function($scope, $http) {}])
+.factory("AutoCompleteServiceHOUSE", ["$http", function ($http) {}])
+.directive("autocompletehouse", ["AutoCompleteServiceHOUSE", '$timeout', '$http', function(AutoCompleteServiceHOUSE, $timeout, $http) {}])
+.service('view2clientserv', function() {})
+.directive('datepicker_', function() {})
+.controller('clientservice', ['$scope','$http', '$timeout', 'view2clientserv', '$location', function($scope, $http, $timeout, view2clientserv, $location) {}])
+.controller('maint_staff', ['$scope','$http', function($scope, $http) {}])
+.directive('elastic', []);
 </pre>
 
 <pre id="text_util.js">

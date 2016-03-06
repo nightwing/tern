@@ -125,7 +125,7 @@ CodeMirror.on(window, "load", function() {
   }
   CodeMirror.on(window, "hashchange", updateFromHash)
 
-  updateFromHash() || initProject("simple")
+  updateFromHash() || initProject("requirejs")
 })
 
 function loadFiles(project, c) {
